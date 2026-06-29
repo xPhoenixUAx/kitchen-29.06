@@ -16,7 +16,31 @@ function relativePrefix() {
   return document.body.dataset.depth === "service" ? "../" : "";
 }
 
+function syncConfigText() {
+  const defaultCompany = "Kitchen Match Network";
+  const company = config.companyName || defaultCompany;
+  if (company === defaultCompany) return;
+  const swapCompany = (value) => value.split(defaultCompany).join(company);
+
+  document.title = swapCompany(document.title);
+  document.querySelectorAll('meta[name="description"]').forEach((meta) => {
+    meta.content = swapCompany(meta.content);
+  });
+
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  const nodes = [];
+  while (walker.nextNode()) {
+    if (walker.currentNode.nodeValue.includes(defaultCompany)) {
+      nodes.push(walker.currentNode);
+    }
+  }
+  nodes.forEach((node) => {
+    node.nodeValue = swapCompany(node.nodeValue);
+  });
+}
+
 function applyConfig() {
+  syncConfigText();
   const prefix = relativePrefix();
   document.querySelectorAll("[data-company]").forEach((el) => {
     el.textContent = config.companyName || "Kitchen Match Network";

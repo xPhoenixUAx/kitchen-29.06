@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://kitchenmatchnetwork.com/sitemap.xml
