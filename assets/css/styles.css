@@ -11,6 +11,7 @@
   --max: 1440px;
   --radius: 8px;
   --shadow: 0 24px 80px rgba(0, 0, 0, 0.24);
+  --anchor-offset: 82px;
 }
 
 * {
@@ -19,6 +20,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: var(--anchor-offset);
 }
 
 body {
@@ -46,6 +48,10 @@ a {
 
 p {
   margin: 0;
+}
+
+[id] {
+  scroll-margin-top: var(--anchor-offset);
 }
 
 .container {
@@ -2370,6 +2376,10 @@ body.cookie-notice-active .floating-action {
 }
 
 @media (max-width: 1024px) {
+  :root {
+    --anchor-offset: 60px;
+  }
+
   .topbar {
     display: none;
   }
